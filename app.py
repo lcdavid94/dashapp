@@ -30,7 +30,7 @@ DATASETS = {  #'VALUE': ['LABEL', header?]
     'table': ['Table', True]
 }
 
-IMG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'GitHub-Mark-64px.png')
+IMG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'maxresdefault.jpg')
 IMG = base64.b64encode(open(IMG_PATH, 'rb').read()).decode()
 
 SHOW = {'display': 'block'}
@@ -67,8 +67,32 @@ def layout():
                                 for year in YEARS
                             ],
                             value=YEARS[0],
-                        ), 
+                        ),                        
                     ]),
+                    html.Div(id='dropdown-wrapper2', children=[
+                        dcc.Dropdown(
+                            id='header-dropdow2',
+                            options=[
+                                {
+                                    'label': str(year)+'-year stat2',
+                                    'value': year
+                                }
+                                for year in YEARS
+                            ],
+                            value=YEARS[0],
+                        ),      
+                        dcc.Dropdown(
+                            id='header-dropdow3',
+                            options=[
+                                {
+                                    'label': str(year)+'-year stat3',
+                                    'value': year
+                                }
+                                for year in YEARS
+                            ],
+                            value=YEARS[0],
+                        ),                           
+                    ]),                    
                 ]),
                 html.Img(id='startup_img', src='data:image/png;base64,{}'.format(IMG)),
                 dcc.Graph(
@@ -180,7 +204,7 @@ def callbacks(_app):
                         figure = {}
                     else:
                         # table
-                        figure = sumtable(sum_data, year)
+                        figure = {}
                 else:
                     if dataset == 'plot':
                         figure = {}
@@ -192,11 +216,6 @@ def callbacks(_app):
                         figure = {}
                 return HIDE, SHOW, figure
         return SHOW, HIDE, {}
-    
-def sumtable(sum_data, year):
-    name = str(1)+"-year stat"
-    sum_date[name]
-    ...
     
     
 # only declare app/server if the file is being run directly
